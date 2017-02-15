@@ -1,4 +1,32 @@
-import angular from 'angular';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/options.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/options.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import angular from 'angular';
 import $ from 'jquery';
 import bootstrap from 'bootstrap';
 import bootstrapcolorpicker from '../../assets/js/bootstrap-colorpicker.min.js';
@@ -69,7 +97,7 @@ export class OptionCtrl {
   }
 
   getData() {
-    browser.storage.local.get(null, (data) => {
+    chrome.storage.local.get(null, (data) => {
       console.log(data);
       this.patterns = JSON.parse(data.savedPatterns);
       this.key = data.yandexTranslatorApiKey;
@@ -137,7 +165,7 @@ export class OptionCtrl {
       setTimeout(() => {
         var opacity = 1,
           ntrvl = setInterval(() => {
-            if (opacity <= 0.01) {
+            if (opacity &lt;= 0.01) {
               clearInterval(ntrvl);
               document.getElementById('status').removeChild(status);
             }
@@ -170,7 +198,7 @@ export class OptionCtrl {
     var keys = Object.keys(translatedWords);
     this.translatedWordsExist = keys.length === 0 ? false : true;
     var result = {};
-    for (var i=0; i<10; i++) {
+    for (var i=0; i&lt;10; i++) {
       let randomKey = keys[Math.round(Math.random() * (keys.length - 0) + 0)];
       if(typeof randomKey !== 'undefined'){
         result[randomKey] = translatedWords[randomKey];
@@ -224,7 +252,7 @@ export class OptionCtrl {
       prb = this.percentage;
 
       for (var index in patterns) {
-        if (patterns[index][0][0] === src[1] && patterns[index][1][0] === trg[1] && patterns[index][2] === prb && patterns[index][4] === translator) {
+        if (patterns[index][0][0] === src[1] &amp;&amp; patterns[index][1][0] === trg[1] &amp;&amp; patterns[index][2] === prb &amp;&amp; patterns[index][4] === translator) {
           duplicateInput = true;
           status('Pattern already exists', 1000, 100, 'error');
         }
@@ -387,7 +415,7 @@ export class OptionCtrl {
   /************************ BLACKLISTING FUNCTIONS ****************************/
 
   addBlackListedWord() {
-    if (/^\s*$/.test(this.newBlacklistWord) === false && this.blacklistedWords.indexOf(this.newBlacklistWord) === -1) {
+    if (/^\s*$/.test(this.newBlacklistWord) === false &amp;&amp; this.blacklistedWords.indexOf(this.newBlacklistWord) === -1) {
       this.blacklistedWords.push(this.newBlacklistWord.trim());
       this.newBlacklistWord = '';
       this.blacklistWordPage = this.range(this.blacklistedWords.length).length - 1;
@@ -415,7 +443,7 @@ export class OptionCtrl {
   }
 
   addBlackListedWebsite() {
-    if (/^\s*$/.test(this.newBlacklistWebsite) === false && this.blacklistedWebsites.indexOf(this.newBlacklistWebsite) === -1) {
+    if (/^\s*$/.test(this.newBlacklistWebsite) === false &amp;&amp; this.blacklistedWebsites.indexOf(this.newBlacklistWebsite) === -1) {
       this.blacklistedWebsites.push(this.newBlacklistWebsite.trim());
       this.newBlacklistWebsite = '';
       this.blacklistWebsitePage = this.range(this.blacklistedWebsites.length).length - 1; //set to last page
@@ -525,7 +553,7 @@ export class OptionCtrl {
   }
 
   addUserDefinedTranslation() {
-    if (/^\s*$/.test(this.original) === false && /^\s*$/.test(this.translated) === false) {
+    if (/^\s*$/.test(this.original) === false &amp;&amp; /^\s*$/.test(this.translated) === false) {
       this.userDefinedTranslations[this.original] = this.translated;
       this.userDefinedTranslationList = this.toList(this.userDefinedTranslations);
       this.userDefinedTranslationPage = this.range(this.userDefinedTranslationList.length).length - 1;
@@ -555,7 +583,7 @@ export class OptionCtrl {
   }
 
   saveTranslation() {
-    if (/^\s*$/.test(this.original) === false && /^\s*$/.test(this.translated) === false) {
+    if (/^\s*$/.test(this.original) === false &amp;&amp; /^\s*$/.test(this.translated) === false) {
       this.savedTranslations[this.original] = this.translated;
       this.savedTranslationList = this.toList(this.savedTranslations);
       this.savedTranslationPage = this.range(this.savedTranslationList.length).length - 1;
@@ -589,7 +617,7 @@ export class OptionCtrl {
   /************************ LEARNT WORDS FUNCTIONS ****************************/
 
   addLearntWord() {
-    if (/^\s*$/.test(this.newLearntWord) === false && this.learntWords.indexOf(this.newLearntWord) === -1) {
+    if (/^\s*$/.test(this.newLearntWord) === false &amp;&amp; this.learntWords.indexOf(this.newLearntWord) === -1) {
       this.learntWords.push(this.newLearntWord.trim());
       this.newLearntWord = '';
       this.learntWordPage = this.range(this.learntWords.length).length - 1;
@@ -699,19 +727,19 @@ export class OptionCtrl {
   }
 
   backupKeys() {
-    browser.storage.local.get(['googleTranslatorApiKey', 'bingTranslatorApiKey', 'yandexTranslatorApiKey'], (data) => {
+    chrome.storage.local.get(['googleTranslatorApiKey', 'bingTranslatorApiKey', 'yandexTranslatorApiKey'], (data) => {
       saveFile(data, 'mtw_keys.txt');
     });
   }
 
   backupAll() {
-    browser.storage.local.get(null, (data) => {
+    chrome.storage.local.get(null, (data) => {
       saveFile(data, 'mtw_config.txt');
     });
   }
 
   validateKeysFile(data) {
-    if ('googleTranslatorApiKey' in data && 'bingTranslatorApiKey' in data && 'yandexTranslatorApiKey' in data) {
+    if ('googleTranslatorApiKey' in data &amp;&amp; 'bingTranslatorApiKey' in data &amp;&amp; 'yandexTranslatorApiKey' in data) {
       return true;
     } else {
       return false;
@@ -813,3 +841,26 @@ export class OptionCtrl {
 angular.module('MTWOptions', [])
   .controller('OptionCtrl', OptionCtrl)
   .filter('startFrom', startFrom);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="OptionCtrl.html">OptionCtrl</a></li><li><a href="PopupCtrl.html">PopupCtrl</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkActiveTabChange">checkActiveTabChange</a></li><li><a href="global.html#checkURLChange">checkURLChange</a></li><li><a href="global.html#contextMenuClickHandler">contextMenuClickHandler</a></li><li><a href="global.html#disableContextMenus">disableContextMenus</a></li><li><a href="global.html#enableContextMenus">enableContextMenus</a></li><li><a href="global.html#initializeLocalStorage">initializeLocalStorage</a></li><li><a href="global.html#setup">setup</a></li><li><a href="global.html#updateContextMenu">updateContextMenu</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sat Feb 04 2017 07:38:20 GMT+0530 (IST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
